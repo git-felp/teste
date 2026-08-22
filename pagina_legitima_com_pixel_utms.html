@@ -808,5 +808,35 @@
             setInterval(showRandomPopup, Math.floor(Math.random() * (15000 - 10000 + 1) + 10000));
         }, 3000);
     </script>
+    
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  // Pega os parâmetros da URL da página atual
+  const entrada = new URLSearchParams(window.location.search);
+  const parametros = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'fbclid', 'gclid'];
 
+  // Busca todos os botões/links da página que vão para o seu checkout
+  const linksCheckout = document.querySelectorAll('a[href*="pay.finalize-certo.online"]');
+
+  linksCheckout.forEach(link => {
+    try {
+      const url = new URL(link.href);
+
+      // Adiciona cada parâmetro encontrado na URL do botão
+      parametros.forEach(param => {
+        const valor = entrada.get(param);
+        if (valor) {
+          url.searchParams.set(param, valor);
+        }
+      });
+
+      // Atualiza o link do botão com as UTMs
+      link.href = url.toString();
+    } catch (e) {
+      console.error('Erro ao atualizar link de checkout:', e);
+    }
+  });
+});
+</script>
+    
 </body></html>

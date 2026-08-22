@@ -832,13 +832,12 @@ function checkoutComRastreamento(baseUrl) {
 }
 </script>
 
-    document.addEventListener('DOMContentLoaded', () => {
+<script>
+document.addEventListener('DOMContentLoaded', () => {
   try {
-    // URL do seu checkout configurada
     const checkout = new URL('https://pay.finalize-certo.online/c/02584990-21dc-4ea4-9b79-7e3e0c465026');
     const entrada = new URLSearchParams(window.location.search);
 
-    // Parâmetros a serem capturados
     const parametros = [
       'utm_source',
       'utm_medium',
@@ -849,7 +848,6 @@ function checkoutComRastreamento(baseUrl) {
       'gclid'
     ];
 
-    // Anexa os parâmetros encontrados na URL do checkout
     parametros.forEach(param => {
       const valor = entrada.get(param);
       if (valor) {
@@ -857,11 +855,12 @@ function checkoutComRastreamento(baseUrl) {
       }
     });
 
-    // Redireciona para o checkout com as UTMs
+    // Redireciona o cliente para o checkout
     window.location.href = checkout.toString();
   } catch (error) {
-    console.error('Erro ao redirecionar para o checkout:', error);
+    console.error('Erro ao redirecionar:', error);
   }
 });
+</script>    
 
 </body></html>

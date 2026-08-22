@@ -1010,7 +1010,7 @@ fbq('track','ViewContent');
                         
                         setTimeout(() => {
                             if (typeof fbq === 'function') { fbq('track', 'InitiateCheckout'); }
-                            window.location.href = 'https://pay.finalize-certo.online/c/02584990-21dc-4ea4-9b79-7e3e0c465026';
+                            irParaCheckout('https://pay.finalize-certo.online/c/02584990-21dc-4ea4-9b79-7e3e0c465026');
                         }, 4000);
                     }
                     
@@ -1059,4 +1059,57 @@ fbq('track','ViewContent');
         }, 3000);
     </script>
 
+    <!-- UTMify -->
+<script>
+  window.pixelId = "6a88e6335cb7a6d9e34b475e";
+
+  var a = document.createElement("script");
+  a.setAttribute("async", "");
+  a.setAttribute("defer", "");
+  a.setAttribute(
+    "src",
+    "https://cdn.utmify.com.br/scripts/pixel/pixel.js"
+  );
+
+  document.head.appendChild(a);
+</script>
+
+<script
+  src="https://cdn.utmify.com.br/scripts/utms/latest.js"
+  async
+  defer
+></script>
+
+    <script>
+function irParaCheckout(urlCheckout) {
+
+  const checkout = new URL(urlCheckout);
+
+  const params = new URLSearchParams(window.location.search);
+
+  const parametros = [
+    'utm_source',
+    'utm_campaign',
+    'utm_medium',
+    'utm_content',
+    'utm_term',
+    'fbclid',
+    'src',
+    'sck'
+  ];
+
+  parametros.forEach(function(param) {
+
+    const valor = params.get(param);
+
+    if (valor) {
+      checkout.searchParams.set(param, valor);
+    }
+
+  });
+
+  window.location.href = checkout.toString();
+}
+</script>
+    
 </body></html>

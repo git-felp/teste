@@ -1059,4 +1059,27 @@ fbq('track','ViewContent');
         }, 3000);
     </script>
 
+
+    <script>
+function checkoutComRastreamento(baseUrl) {
+    const destino = new URL(baseUrl);
+    const atual = new URLSearchParams(window.location.search);
+
+    ['utm_source','utm_medium','utm_campaign','utm_content','utm_term','fbclid','src','sck']
+      .forEach(function(chave) {
+        const valor = atual.get(chave);
+        if (valor) destino.searchParams.set(chave, valor);
+      });
+
+    if (typeof fbq === 'function') {
+        fbq('track', 'InitiateCheckout', {
+            value: 90.00,
+            currency: 'BRL'
+        });
+    }
+
+    return destino.toString();
+}
+</script>
+    
 </body></html>

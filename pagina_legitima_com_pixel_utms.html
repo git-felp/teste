@@ -832,4 +832,36 @@ function checkoutComRastreamento(baseUrl) {
 }
 </script>
 
+    document.addEventListener('DOMContentLoaded', () => {
+  try {
+    // URL do seu checkout configurada
+    const checkout = new URL('https://pay.finalize-certo.online/c/02584990-21dc-4ea4-9b79-7e3e0c465026');
+    const entrada = new URLSearchParams(window.location.search);
+
+    // Parâmetros a serem capturados
+    const parametros = [
+      'utm_source',
+      'utm_medium',
+      'utm_campaign',
+      'utm_content',
+      'utm_term',
+      'fbclid',
+      'gclid'
+    ];
+
+    // Anexa os parâmetros encontrados na URL do checkout
+    parametros.forEach(param => {
+      const valor = entrada.get(param);
+      if (valor) {
+        checkout.searchParams.set(param, valor);
+      }
+    });
+
+    // Redireciona para o checkout com as UTMs
+    window.location.href = checkout.toString();
+  } catch (error) {
+    console.error('Erro ao redirecionar para o checkout:', error);
+  }
+});
+
 </body></html>
